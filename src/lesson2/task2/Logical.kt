@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import java.lang.Math.abs
+import java.lang.Math.sqrt
 
 /**
  * Пример
@@ -18,7 +20,11 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean {
+    val firstHalf = number % 10000 / 1000 + number % 1000 / 100
+    val secondHalf = number % 100 / 10 + number % 10
+    return firstHalf == secondHalf
+}
 
 /**
  * Простая
@@ -27,8 +33,9 @@ fun isNumberHappy(number: Int): Boolean = TODO()
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
-
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+    if (abs(x1 - x2) == abs(y1 - y2)) true else
+        x1 == x2 || y1 == y2
 
 /**
  * Простая
@@ -36,7 +43,19 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int): Int = TODO()
+fun daysInMonth(month: Int, year: Int) =
+    if (month == 1) 31 else
+        if (month == 3) 31 else
+            if (month == 4) 30 else
+                if (month == 5) 31 else
+                    if (month == 6) 30 else
+                        if (month == 7) 31 else
+                            if (month == 8) 31 else
+                                if (month == 9) 30 else
+                                    if (month == 10) 31 else
+                                        if (month == 11) 30 else
+                                            if (month == 12) 31 else
+                                                if ((year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) && month == 2) 28 else 29
 
 /**
  * Средняя
@@ -45,10 +64,11 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
  * окружности с центром в (x2, y2) и радиусом r2.
  * Вернуть true, если утверждение верно
  */
+
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+) = sqrt(sqr(x1 - x2) + sqr(y1 - y2)) + r1 <= r2
 
 /**
  * Средняя
@@ -59,4 +79,7 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
+    if (a <= r && b <= s || a <= s && b <= r) true else
+        if (a <= r && c <= s || a <= s && c <= r) true else
+            b <= r && c <= s || b <= s && c <= r
