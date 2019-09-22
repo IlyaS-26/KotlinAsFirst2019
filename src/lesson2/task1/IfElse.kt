@@ -110,9 +110,10 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = if (rookX1 != kingX && rookY1 != kingY && rookX2 != kingX && rookY2 != kingY) 0 else
-    if (rookX1 == kingX || rookY1 == kingY && rookX2 != kingX && rookY2 != kingY) 1 else
-        if ((rookX1 == kingX || rookY1 == kingY) && (rookX2 == kingX || rookY2 == kingY)) 3 else 2
+): Int =
+    if ((rookX1 == kingX || rookY1 == kingY) && (rookX2 == kingX || rookY2 == kingY)) 3 else
+        if (rookX1 != kingX && rookY1 != kingY && rookX2 != kingX && rookY2 != kingY) 0 else
+            if (rookX1 == kingX || rookY1 == kingY && rookX2 != kingX && rookY2 != kingY) 1 else 2
 
 /**
  * Простая
@@ -129,9 +130,10 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int =
-    if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 2 else
-        if (rookX == kingX || rookY == kingY && bishopX - kingX != bishopY - kingY) 1 else
-            if (rookX != kingX && rookY != kingY && bishopX - kingX != bishopY - kingY) 0 else 3
+    if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) != abs(kingY - bishopY))) 0 else
+        if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 3 else
+            if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 2 else 1
+
 
 /**
  * Простая
@@ -158,4 +160,5 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
     if (d > b && c > b) -1 else if (b > d && a > d) -1 else
         if (b > d && a == d) 0 else if (d > b && c == b) 0 else
             if (b > d && a < c) d - c else if (d > b && c < a) b - a else
-                if (d > b && c > a) b - c else d - a
+                if (a == c && d > b) b - a else if (c == a && b > d) d - c else
+                    if (d > b && c > a) b - c else d - a
