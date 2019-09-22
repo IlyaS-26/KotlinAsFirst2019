@@ -130,10 +130,9 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int =
-    if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) != abs(kingY - bishopY))) 0 else
-        if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 3 else
-            if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 2 else 1
-
+    if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) != abs(kingY - bishopY))) 1 else
+        if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 2 else
+            if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 3 else 0
 
 /**
  * Простая
@@ -161,4 +160,5 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
         if (b > d && a == d) 0 else if (d > b && c == b) 0 else
             if (b > d && a < c) d - c else if (d > b && c < a) b - a else
                 if (a == c && d > b) b - a else if (c == a && b > d) d - c else
-                    if (d > b && c > a) b - c else d - a
+                    if (b == d && a < c) b - c else if (d == b && c < a) d - a else
+                        if (d > b && c > a) b - c else d - a
