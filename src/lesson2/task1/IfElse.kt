@@ -89,12 +89,11 @@ fun timeForHalfWay(
     val s1 = t1 * v1
     val s2 = t2 * v2
     val s3 = t3 * v3
-    var halfT = 0.0
     val halfS = (s1 + s2 + s3) / 2
-    halfT = if (halfS <= s1) halfS / v1 else
+    return if (halfS <= s1) halfS / v1 else
         if (halfS > s1 && halfS <= s1 + s2) t1 + (halfS - s1) / v2 else
             t1 + t2 + (halfS - s1 - s2) / v3
-    return halfT
+    return halfS
 }
 
 /**
@@ -111,9 +110,10 @@ fun whichRookThreatens(
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
 ): Int =
-    if ((rookX1 == kingX || rookY1 == kingY) && (rookX2 == kingX || rookY2 == kingY)) 3 else
-        if (rookX1 != kingX && rookY1 != kingY && rookX2 != kingX && rookY2 != kingY) 0 else
-            if (rookX1 == kingX || rookY1 == kingY && rookX2 != kingX && rookY2 != kingY) 1 else 2
+    if ((rookX1 == kingX || rookY1 == kingY) && (rookX2 == kingX || rookY2 == kingY)) 3
+    else if (rookX1 != kingX && rookY1 != kingY && rookX2 != kingX && rookY2 != kingY) 0
+    else if (rookX1 == kingX || rookY1 == kingY && rookX2 != kingX && rookY2 != kingY) 1
+    else 2
 
 /**
  * Простая
@@ -130,9 +130,10 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int =
-    if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) != abs(kingY - bishopY))) 1 else
-        if (rookX != kingX && rookY != kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 2 else
-            if (rookX == kingX || rookY == kingY && (abs(kingX - bishopX) == abs(kingY - bishopY))) 3 else 0
+    if ((rookX == kingX || rookY == kingY) && abs(kingX - bishopX) != abs(kingY - bishopY)) 1
+    else if ((rookX != kingX && rookY != kingY) && abs(kingX - bishopX) == abs(kingY - bishopY)) 2
+    else if ((rookX == kingX || rookY == kingY) && abs(kingX - bishopX) == abs(kingY - bishopY)) 3
+    else 0
 
 /**
  * Простая
@@ -143,9 +144,16 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int =
-    if (c > a + b) -1 else if (a > c + b) -1 else if (b > a + c) -1 else
-        if (sqr(a) == sqr(b) + sqr(c)) 1 else if (sqr(b) == sqr(a) + sqr(c)) 1 else if (sqr(c) == sqr(a) + sqr(b)) 1 else
-            if (sqr(a) > sqr(b) + sqr(c)) 2 else if (sqr(b) > sqr(c) + sqr(a)) 2 else if (sqr(c) > sqr(a) + sqr(b)) 2 else 0
+    if (c > a + b) -1
+    else if (a > c + b) -1
+    else if (b > a + c) -1
+    else if (sqr(a) == sqr(b) + sqr(c)) 1
+    else if (sqr(b) == sqr(a) + sqr(c)) 1
+    else if (sqr(c) == sqr(a) + sqr(b)) 1
+    else if (sqr(a) > sqr(b) + sqr(c)) 2
+    else if (sqr(b) > sqr(c) + sqr(a)) 2
+    else if (sqr(c) > sqr(a) + sqr(b)) 2
+    else 0
 
 /**
  * Средняя
@@ -156,9 +164,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int =
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
-    if (d > b && c > b) -1 else if (b > d && a > d) -1 else
-        if (b > d && a == d) 0 else if (d > b && c == b) 0 else
-            if (b > d && a < c) d - c else if (d > b && c < a) b - a else
-                if (a == c && d > b) b - a else if (c == a && b > d) d - c else
-                    if (b == d && a < c) b - c else if (d == b && c < a) d - a else
-                        if (d > b && c > a) b - c else d - a
+    if (d > b && c > b) -1
+    else if (b > d && a > d) -1
+    else if (b > d && a == d) 0
+    else if (d > b && c == b) 0
+    else if (b > d && a < c) d - c
+    else if (d > b && c < a) b - a
+    else if (a == c && d > b) b - a
+    else if (c == a && b > d) d - c
+    else if (b == d && a < c) b - c
+    else if (d == b && c < a) d - a
+    else if (d > b && c > a) b - c
+    else d - a

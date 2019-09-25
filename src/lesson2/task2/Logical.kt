@@ -34,8 +34,8 @@ fun isNumberHappy(number: Int): Boolean {
  * Считать, что ферзи не могут загораживать друг друга.
  */
 fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
-    if (abs(x1 - x2) == abs(y1 - y2)) true else
-        x1 == x2 || y1 == y2
+    if (abs(x1 - x2) == abs(y1 - y2)) true
+    else x1 == x2 || y1 == y2
 
 /**
  * Простая
@@ -43,19 +43,21 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int) =
-    if (month == 1) 31 else
-        if (month == 3) 31 else
-            if (month == 4) 30 else
-                if (month == 5) 31 else
-                    if (month == 6) 30 else
-                        if (month == 7) 31 else
-                            if (month == 8) 31 else
-                                if (month == 9) 30 else
-                                    if (month == 10) 31 else
-                                        if (month == 11) 30 else
-                                            if (month == 12) 31 else
-                                                if ((year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) && month == 2) 28 else 29
+fun daysInMonth(month: Int, year: Int) = when {
+    (month == 1) -> 31
+    (month == 3) -> 31
+    (month == 4) -> 30
+    (month == 5) -> 31
+    (month == 6) -> 30
+    (month == 7) -> 31
+    (month == 8) -> 31
+    (month == 9) -> 30
+    (month == 10) -> 31
+    (month == 11) -> 30
+    (month == 12) -> 31
+    ((year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) && month == 2) -> 28
+    else -> 29
+}
 
 /**
  * Средняя
@@ -80,6 +82,6 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    if (a <= r && b <= s || a <= s && b <= r) true else
-        if (a <= r && c <= s || a <= s && c <= r) true else
-            b <= r && c <= s || b <= s && c <= r
+    if (a <= r && b <= s || a <= s && b <= r) true
+    else if (a <= r && c <= s || a <= s && c <= r) true
+    else b <= r && c <= s || b <= s && c <= r
