@@ -2,7 +2,12 @@
 
 package lesson3.task1
 
+import kotlinx.html.I
+import lesson1.task1.sqr
+import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.math.truncate
 
 /**
  * Пример
@@ -68,9 +73,9 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var digit = 0
     var e = n
-    digit = if (e == 0) 1 else 0
+    var digit = 0
+    if (e == 0) return 1
     while (e > 0) {
         digit += 1
         e /= 10
@@ -125,7 +130,7 @@ fun minDivisor(n: Int): Int {
     var minDel = 0
     for (i in 2..n) {
         minDel = i
-        if (i % n == 0) break
+        if (n % i == 0) break
     }
     return minDel
 }
@@ -137,9 +142,9 @@ fun minDivisor(n: Int): Int {
  */
 fun maxDivisor(n: Int): Int {
     var maxDel = 0
-    for (i in n - 1 downTo 2) {
+    for (i in n - 1 downTo 1) {
         maxDel = i
-        if (i % n == 0) break
+        if (n % i == 0) break
     }
     return maxDel
 }
@@ -179,6 +184,7 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * этого для какого-либо начального X > 0.
  */
 fun collatzSteps(x: Int): Int = TODO()
+
 
 /**
  * Средняя
@@ -244,12 +250,10 @@ fun isPalindrome(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    var n1 = n % 10
-    var n2 = n % 100 / 10
-    val result = false
+    val n1 = n % 10
+    val n2 = n % 100 / 10
     val number = revert(n)
-    if (n == number && n1 == n2) return result
-    else return true
+    return !(n == number && n1 == n2 || n in 0..9)
 }
 
 /**
@@ -262,7 +266,6 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int = TODO()
-
 
 /**
  * Сложная
