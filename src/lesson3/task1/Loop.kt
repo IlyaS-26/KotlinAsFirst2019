@@ -250,10 +250,9 @@ fun isPalindrome(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    val n1 = n % 10
-    val n2 = n % 100 / 10
-    val number = revert(n)
-    return !(n == number && n1 == n2 || n in 0..9)
+    val number = digitNumber(n)
+    val digit = n % 10
+    return digitCountInNumber(n, digit) != number
 }
 
 /**
@@ -265,7 +264,22 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var sqr: Int
+    var n1 = 0
+    var a = 0
+    if (n <= 1) return 1
+    while (n1 < n) {
+        a += 1
+        sqr = sqr(a)
+        do {
+            n1 += 1
+            sqr /= 10
+        } while (sqr > 0)
+    }
+    a = (sqr(a) / 10.0.pow(n1 - n)).toInt()
+    return a % 10
+}
 
 /**
  * Сложная
@@ -276,4 +290,19 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var fib: Int
+    var n1 = 0
+    var a = 0
+    if (n <= 1) return 1
+    while (n1 < n) {
+        a += 1
+        fib = fib(a)
+        do {
+            n1 += 1
+            fib /= 10
+        } while (fib > 0)
+    }
+    a = (fib(a) / 10.0.pow(n1 - n)).toInt()
+    return a % 10
+}
