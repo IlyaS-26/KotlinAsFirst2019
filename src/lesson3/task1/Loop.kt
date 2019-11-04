@@ -268,7 +268,6 @@ fun squareSequenceDigit(n: Int): Int {
     var sqr: Int
     var n1 = 0
     var a = 0
-    if (n <= 1) return 1
     while (n1 < n) {
         a += 1
         sqr = sqr(a)
@@ -294,7 +293,6 @@ fun fibSequenceDigit(n: Int): Int {
     var fib: Int
     var n1 = 0
     var a = 0
-    if (n <= 1) return 1
     while (n1 < n) {
         a += 1
         fib = fib(a)

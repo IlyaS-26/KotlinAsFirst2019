@@ -143,16 +143,18 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int =
-    if (c > a + b) -1
-    else if (a > c + b) -1
-    else if (b > a + c) -1
-    else if (sqr(a) == sqr(b) + sqr(c)) 1
-    else if (sqr(b) == sqr(a) + sqr(c)) 1
-    else if (sqr(c) == sqr(a) + sqr(b)) 1
-    else if (sqr(a) > sqr(b) + sqr(c)) 2
-    else if (sqr(b) > sqr(c) + sqr(a)) 2
-    else if (sqr(c) > sqr(a) + sqr(b)) 2
-    else 0
+    when {
+        c > a + b -> -1
+        a > c + b -> -1
+        b > a + c -> -1
+        sqr(a) == sqr(b) + sqr(c) -> 1
+        sqr(b) == sqr(a) + sqr(c) -> 1
+        sqr(c) == sqr(a) + sqr(b) -> 1
+        sqr(a) > sqr(b) + sqr(c) -> 2
+        sqr(b) > sqr(c) + sqr(a) -> 2
+        sqr(c) > sqr(a) + sqr(b) -> 2
+        else -> 0
+    }
 
 /**
  * Средняя
@@ -163,10 +165,12 @@ fun triangleKind(a: Double, b: Double, c: Double): Int =
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
-    if (d > b && c > b || b > d && a > d) -1
-    else if (b > d && a == d || d > b && c == b) 0
-    else if (b > d && a < c || c == a && b > d) d - c
-    else if (d > b && c < a || a == c && d > b) b - a
-    else if (b == d && a < c || d > b && c > a) b - c
-    else if (d == b && c < a) d - a
-    else d - a
+    when {
+        d > b && c > b || b > d && a > d -> -1
+        b > d && a == d || d > b && c == b -> 0
+        b > d && a < c || c == a && b > d -> d - c
+        d > b && c < a || a == c && d > b -> b - a
+        b == d && a < c || d > b && c > a -> b - c
+        d == b && c < a -> d - a
+        else -> d - a
+    }
