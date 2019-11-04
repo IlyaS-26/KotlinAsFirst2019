@@ -214,7 +214,6 @@ fun factorize(n: Int): List<Int> {
         if (varN % digit == 0) {
             list.add(digit)
             varN /= digit
-            if (digit == 1) digit++
         } else digit += 1
     }
     return list
@@ -242,8 +241,7 @@ fun convert(n: Int, base: Int): List<Int> {
     var number = 0
     val list = mutableListOf<Int>()
     if (n < base) {
-        number = varN
-        list.add(number)
+        list.add(varN)
         return list
     }
     while (varN > 0) {
@@ -286,7 +284,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var number = 0
     var size = digits.size
     for (i in 0 until digits.size) {
-        size -= 1
+        size--
         number += (digits[i] * base.toDouble().pow(size)).toInt()
     }
     return number
