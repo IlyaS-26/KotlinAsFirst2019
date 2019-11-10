@@ -2,12 +2,8 @@
 
 package lesson3.task1
 
-import kotlinx.html.I
 import lesson1.task1.sqr
-import kotlin.math.abs
-import kotlin.math.pow
 import kotlin.math.sqrt
-import kotlin.math.truncate
 
 /**
  * Пример
@@ -77,7 +73,7 @@ fun digitNumber(n: Int): Int {
     var digit = 0
     if (e == 0) return 1
     while (e != 0) {
-        digit += 1
+        digit++
         e /= 10
     }
     return digit
@@ -92,13 +88,12 @@ fun digitNumber(n: Int): Int {
 fun fib(n: Int): Int {
     var fib1 = 1
     var fib2 = 1
-    var fibSum = 0
     var i = 0
     while (i < n - 2) {
-        fibSum = fib1 + fib2
+        val fibSum = fib1 + fib2
         fib1 = fib2
         fib2 = fibSum
-        i += 1
+        i++
     }
     return fib2
 }
@@ -112,13 +107,11 @@ fun fib(n: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var varM = m
     var varN = n
-    var nok = 0
     while (varM != varN) {
         if (varM > varN) varM -= varN
         else varN -= varM
     }
-    nok = m * (n / varM)
-    return nok
+    return m * (n / varM)
 }
 
 /**
@@ -264,19 +257,27 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
+fun powInt(x: Int, y: Int): Int {
+    var varX = x
+    if (y == 0) return 1
+    for (i in 1 until y) {
+        varX *= x
+    }
+    return varX
+}
 fun squareSequenceDigit(n: Int): Int {
-    var sqr: Int
     var n1 = 0
     var a = 0
     while (n1 < n) {
-        a += 1
-        sqr = sqr(a)
+        a++
+        var sqr = sqr(a)
         do {
             n1 += 1
             sqr /= 10
         } while (sqr > 0)
     }
-    a = (sqr(a) / 10.0.pow(n1 - n)).toInt()
+    a = (sqr(a) / powInt(10, n1 - n))
     return a % 10
 }
 
@@ -289,18 +290,18 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
 fun fibSequenceDigit(n: Int): Int {
-    var fib: Int
     var n1 = 0
     var a = 0
     while (n1 < n) {
-        a += 1
-        fib = fib(a)
+        a++
+        var fib = fib(a)
         do {
             n1 += 1
             fib /= 10
         } while (fib > 0)
     }
-    a = (fib(a) / 10.0.pow(n1 - n)).toInt()
+    a = (fib(a) / powInt(10, n1 - n))
     return a % 10
 }
