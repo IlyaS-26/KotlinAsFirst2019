@@ -114,6 +114,7 @@ fun whichRookThreatens(
     if (rookX2 == kingX || rookY2 == kingY) a += 2
     return a
 }
+
 /**
  * Простая
  *

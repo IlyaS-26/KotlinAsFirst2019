@@ -266,6 +266,7 @@ fun powInt(x: Int, y: Int): Int {
     }
     return varX
 }
+
 fun squareSequenceDigit(n: Int): Int {
     var n1 = 0
     var a = 0
