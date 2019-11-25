@@ -76,16 +76,20 @@ fun dateStrToDigit(str: String): String {
         "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
         "августа", "сентября", "октября", "ноября", "декабря"
     )
-    val parts = str.split(" ")
-    if (parts.size != 3) return ""
-    val day = parts[0].toInt()
-    val year = parts[2].toInt()
-    val month: Int
-    if (parts[1] in monthList) {
-        month = (monthList.indexOf(parts[1]) + 1)
-    } else return ""
-    if (day > daysInMonth(month, year)) return ""
-    return String.format("%02d.%02d.%d", day, month, year)
+    try {
+        val parts = str.split(" ")
+        if (parts.size != 3) return ""
+        val day = parts[0].toInt()
+        val year = parts[2].toInt()
+        val month: Int
+        if (parts[1] in monthList) {
+            month = (monthList.indexOf(parts[1]) + 1)
+        } else return ""
+        if (day > daysInMonth(month, year)) return ""
+        return String.format("%02d.%02d.%d", day, month, year)
+    } catch (e: NumberFormatException) {
+        return ""
+    }
 }
 
 /**
@@ -109,7 +113,6 @@ fun dateDigitToStr(digital: String): String {
         val month: String
         val monthNumbers = parts[1].toInt()
         if (parts.size != 3) return ""
-        if (parts[2].length != 4) return ""
         if (monthNumbers !in 1..12) return ""
         if (day > daysInMonth(monthNumbers, parts[2].toInt())) return ""
         month = monthList[monthNumbers - 1]
