@@ -72,7 +72,7 @@ fun main() {
  * входными данными.
  */
 fun dateStrToDigit(str: String): String {
-    val monthList = listOf(
+    val listOfMonths = listOf(
         "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
         "августа", "сентября", "октября", "ноября", "декабря"
     )
@@ -82,8 +82,8 @@ fun dateStrToDigit(str: String): String {
         val day = parts[0].toInt()
         val year = parts[2].toInt()
         val month: Int
-        if (parts[1] in monthList) {
-            month = (monthList.indexOf(parts[1]) + 1)
+        if (parts[1] in listOfMonths) {
+            month = (listOfMonths.indexOf(parts[1]) + 1)
         } else return ""
         if (day > daysInMonth(month, year)) return ""
         return String.format("%02d.%02d.%d", day, month, year)
@@ -103,7 +103,7 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    val monthList = listOf(
+    val listOfMonths = listOf(
         "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
         "августа", "сентября", "октября", "ноября", "декабря"
     )
@@ -115,7 +115,7 @@ fun dateDigitToStr(digital: String): String {
         if (parts.size != 3) return ""
         if (monthNumbers !in 1..12) return ""
         if (day > daysInMonth(monthNumbers, parts[2].toInt())) return ""
-        month = monthList[monthNumbers - 1]
+        month = listOfMonths[monthNumbers - 1]
         return String.format("%d %s %s", day, month, parts[2])
     } catch (e: NumberFormatException) {
         return ""
