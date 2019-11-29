@@ -131,11 +131,7 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
-    for ((key, value) in b) {
-        if (a[key] == value) a.remove(key)
-    }
-}
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit = TODO()
 
 /**
  * Простая
@@ -308,6 +304,7 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    if (list.isEmpty()) return Pair(-1, -1)
     if (list.all { it == 0 } && number == 0) return Pair(0, 1)
     for (i in list.indices) {
         for (j in list.indices.takeWhile { it != i })
