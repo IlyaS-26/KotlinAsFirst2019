@@ -3,6 +3,7 @@
 package lesson6.task1
 
 import lesson2.task2.daysInMonth
+import java.lang.Exception
 
 /**
  * Пример
@@ -172,7 +173,16 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val plus = mutableListOf<Int>()
+    if (!expression.matches(Regex("""(([-]?[0-9]+\s[+-]\s)+)?[0-9]+"""))) throw IllegalArgumentException()
+    val result = expression.replace(" ", "")
+    val regex = Regex("""[+-]?[0-9]+""").findAll(result)
+    for (i in regex) {
+        plus.add(i.value.toInt())
+    }
+    return plus.sum()
+}
 
 /**
  * Сложная
@@ -183,7 +193,24 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val strLow = str.toLowerCase()
+    val parts = strLow.split(" ")
+    var digit = 0
+    for (i in parts.indices) {
+        for (j in i + 1 until parts.size) {
+            if (parts[i] == parts[j] && j - i == 1) {
+                val result = parts.subList(0, j).toString().replace(" ", "")
+                for (l in result.indices) {
+                    digit++
+                }
+                digit = digit - 3 - parts[j].length + 1
+                return digit
+            }
+        }
+    }
+    return -1
+}
 
 /**
  * Сложная
