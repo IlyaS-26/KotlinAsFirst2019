@@ -131,7 +131,10 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit = TODO()
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
+    for ((key) in b)
+        if (a[key] == b[key]) a.remove(key)
+}
 
 /**
  * Простая
@@ -196,21 +199,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var result = String()
-    var min = Double.MAX_VALUE
-    var i = 0
-    for ((name, pair) in stuff) {
-        if (kind == pair.first) {
-            if (pair.second < min) {
-                min = pair.second
-                result = name
-                i++
-            }
-        }
-    }
-    return if (i > 0) result else null
-}
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
 
 /**
  * Средняя

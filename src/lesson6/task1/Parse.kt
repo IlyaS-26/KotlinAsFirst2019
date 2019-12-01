@@ -3,7 +3,6 @@
 package lesson6.task1
 
 import lesson2.task2.daysInMonth
-import java.lang.Exception
 
 /**
  * Пример
@@ -197,19 +196,17 @@ fun firstDuplicateIndex(str: String): Int {
     val strLow = str.toLowerCase()
     val parts = strLow.split(" ")
     var digit = 0
-    for (i in parts.indices) {
-        for (j in i + 1 until parts.size) {
-            if (parts[i] == parts[j] && j - i == 1) {
-                val result = parts.subList(0, j).toString().replace(" ", "")
-                for (l in result.indices) {
-                    digit++
-                }
-                digit = digit - 3 - parts[j].length + 1
-                return digit
+    for (i in 0 until parts.size - 1) {
+        if (parts[i] == parts[i + 1]) {
+            val result = parts.subList(0, i + 1).toString().replace(" ", "")
+            for (l in result.indices) {
+                digit++
             }
+            digit = digit - 3 - parts[i].length + 1
+            return digit
         }
     }
-    return -1
+return -1
 }
 
 /**
