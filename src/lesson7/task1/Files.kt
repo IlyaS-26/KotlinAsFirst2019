@@ -69,7 +69,9 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) = TODO()
+fun sibilants(inputName: String, outputName: String) {
+    TODO()
+}
 
 /**
  * Средняя
