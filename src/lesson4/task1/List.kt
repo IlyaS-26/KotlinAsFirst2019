@@ -240,7 +240,7 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  */
 fun convert(n: Int, base: Int): List<Int> {
     var varN = n
-    var number = 0
+    var number: Int
     val list = mutableListOf<Int>()
     if (n < base) {
         list.add(varN)
@@ -332,7 +332,7 @@ fun russian(n: Int): String {
         "одна тысяча",
         "две тысячи",
         "три тысячи",
-        " четыре тысячи",
+        "четыре тысячи",
         "пять тысяч",
         "шесть тысяч",
         "семь тысяч",

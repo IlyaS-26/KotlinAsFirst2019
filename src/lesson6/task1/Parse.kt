@@ -79,7 +79,7 @@ val listOfMonths = listOf(
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
     if (parts.size != 3) return ""
-    if (!str.matches(Regex("""\d{2}\s[а-я]{3,8}\s\d{4}"""))) return ""
+    if (!str.matches(Regex("""\d*\s[а-я]{3,8}\s\d*"""))) return ""
     val day = parts[0].toInt()
     val year = parts[2].toInt()
     val month: Int
@@ -202,7 +202,7 @@ fun firstDuplicateIndex(str: String): Int {
  * Все цены должны быть больше либо равны нуля.
  */
 fun mostExpensive(description: String): String {
-    if (!description.matches(Regex("""([А-яA-z]+\s\d*\.?\d+?;?\s?)+"""))) return ""
+    if (!description.matches(Regex("""([А-яA-z0-9]+\s\d*\.?\d+?;?\s?)+"""))) return ""
     var max = 0.0
     var result = ""
     val parts = description.split("; ")

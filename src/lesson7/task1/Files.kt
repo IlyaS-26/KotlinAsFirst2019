@@ -147,30 +147,26 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         if (line.trim().length > maxLength) maxLength = line.trim().length
     }
     for (line in file) {
-        if (line.trim().length == maxLength) {
-            writer.write(line.trim())
-        } else {
-            if (line.trim().split(" ").count() - 1 > 1) {
-                val split = line.trim().split(" ")
-                val space = split.size - 1
-                val needSpace = (maxLength - line.trim().length) / space
-                var needSpace2 = (maxLength - line.trim().length) % space
-                var words = split.size
-                for (i in split.indices) {
-                    writer.write(split[i])
-                    if (i == split.lastIndex) break
-                    if (words <= 1) continue
-                    if (needSpace2 > 0) {
-                        for (j in 1..needSpace + 2) writer.write(" ")
-                        needSpace2 -= 1
-                    } else {
-                        for (j in 1..needSpace + 1) writer.write(" ")
-                    }
-                    words -= 1
+        if (line.trim().split(" ").count() - 1 > 1) {
+            val split = line.trim().split(" ")
+            val space = split.size - 1
+            val needSpace = (maxLength - line.trim().length) / space
+            var needSpace2 = (maxLength - line.trim().length) % space
+            var words = split.size
+            for (i in split.indices) {
+                writer.write(split[i])
+                if (i == split.lastIndex) break
+                if (words <= 1) continue
+                if (needSpace2 > 0) {
+                    for (j in 1..needSpace + 2) writer.write(" ")
+                    needSpace2 -= 1
+                } else {
+                    for (j in 1..needSpace + 1) writer.write(" ")
                 }
-            } else {
-                writer.write(line.trim().split(" ")[0])
+                words -= 1
             }
+        } else {
+            writer.write(line.trim().split(" ")[0])
         }
         writer.newLine()
     }
