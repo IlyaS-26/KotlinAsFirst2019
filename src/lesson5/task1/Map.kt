@@ -110,9 +110,10 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    var result = true
+    var result = false
     for ((key) in a) {
-        result = a[key] == b[key]
+        if (a[key] != b[key]) return false
+        else result = true
     }
     return result
 }
@@ -200,19 +201,17 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *   ) -> "Мария"
  */
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var result = String()
+    var result: String? = null
     var min = Double.MAX_VALUE
-    var i = 0
     for ((name, pair) in stuff) {
         if (kind == pair.first) {
             if (pair.second <= min) {
                 min = pair.second
                 result = name
-                i++
             }
         }
     }
-    return if (i > 0) result else null
+    return result
 }
 
 /**
@@ -307,10 +306,9 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    if (list.isEmpty()) return Pair(-1, -1)
+    val resultMap = mutableMapOf<Int, Int>()
     for (i in list.indices) {
-        for (j in list.indices.takeWhile { it != i })
-            if (list[i] + list[j] == number) return Pair(j, i)
+        if (number - list[i] !in resultMap) resultMap[list[i]] = i else return Pair(resultMap[number - list[i]]!!, i)
     }
     return Pair(-1, -1)
 }

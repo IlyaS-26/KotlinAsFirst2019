@@ -71,26 +71,25 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
+val listOfMonths = listOf(
+    "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+    "августа", "сентября", "октября", "ноября", "декабря"
+)
+
 fun dateStrToDigit(str: String): String {
-    val listOfMonths = listOf(
-        "января", "февраля", "марта", "апреля", "мая", "июня", "июля",
-        "августа", "сентября", "октября", "ноября", "декабря"
-    )
-    try {
-        val parts = str.split(" ")
-        if (parts.size != 3) return ""
-        val day = parts[0].toInt()
-        val year = parts[2].toInt()
-        val month: Int
-        if (parts[1] in listOfMonths) {
-            month = (listOfMonths.indexOf(parts[1]) + 1)
-        } else return ""
-        if (day > daysInMonth(month, year)) return ""
-        return String.format("%02d.%02d.%d", day, month, year)
-    } catch (e: NumberFormatException) {
-        return ""
-    }
+    val parts = str.split(" ")
+    if (parts.size != 3) return ""
+    if (!str.matches(Regex("""\d{2}\s[а-я]{3,8}\s\d{4}"""))) return ""
+    val day = parts[0].toInt()
+    val year = parts[2].toInt()
+    val month: Int
+    if (parts[1] in listOfMonths) {
+        month = (listOfMonths.indexOf(parts[1]) + 1)
+    } else return ""
+    if (day > daysInMonth(month, year)) return ""
+    return String.format("%02d.%02d.%d", day, month, year)
 }
+
 
 /**
  * Средняя
@@ -188,7 +187,7 @@ fun firstDuplicateIndex(str: String): Int {
             return digit
         }
     }
-return -1
+    return -1
 }
 
 /**
@@ -202,7 +201,21 @@ return -1
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше либо равны нуля.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    if (!description.matches(Regex("""([А-я]+\s\d+\.\d+;?\s?)+"""))) return ""
+    var max = 0.0
+    var result = ""
+    val parts = description.split("; ")
+    for (i in parts) {
+        val partsI = i.split(" ")
+        val pairs = Pair(partsI[0], partsI[1].toDouble())
+        if (pairs.second > max) {
+            max = pairs.second
+            result = pairs.first
+        }
+    }
+    return result
+}
 
 /**
  * Сложная
