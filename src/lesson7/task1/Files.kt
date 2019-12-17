@@ -156,11 +156,11 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             for (i in split.indices) {
                 writer.write(split[i])
                 if (words > 1) {
-                    if (needSpace2 != 0) {
+                    if (needSpace2 == 0) {
+                        for (j in 1..needSpace + 1) writer.write(" ")
+                    } else if (needSpace2 != 0) {
                         for (j in 1..needSpace + 2) writer.write(" ")
                         needSpace2--
-                    } else if (needSpace2 == 0) {
-                        for (j in 1..needSpace + 1) writer.write(" ")
                     }
                     words--
                 }
