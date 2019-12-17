@@ -147,7 +147,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
         if (line.trim().length > maxLength) maxLength = line.trim().length
     }
     for (line in file) {
-        if (line.trim().split(" ").count() - 1 > 1) {
+        if (line.trim().split(" ").count() - 1 >= 1) {
             val split = line.trim().split(" ")
             val space = split.size - 1
             val needSpace = (maxLength - line.trim().length) / space
