@@ -148,7 +148,8 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     }
     for (line in file) {
         if (line.trim().split(" ").count() - 1 >= 1) {
-            val split = line.trim().split(" ")
+            val lineWriter = line.replace(Regex("""\s{2,}"""), " ")
+            val split = lineWriter.trim().split(" ")
             val space = split.size - 1
             val needSpace = (maxLength - line.trim().length) / space
             var needSpace2 = (maxLength - line.trim().length) % space
