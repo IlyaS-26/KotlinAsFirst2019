@@ -151,21 +151,19 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             val lineWriter = line.replace(Regex("""\s{2,}"""), " ")
             val split = lineWriter.trim().split(" ")
             val space = split.size - 1
-            val needSpace = (maxLength - line.trim().length) / space
-            var needSpace2 = (maxLength - line.trim().length) % space
+            val needSpace = (maxLength - lineWriter.trim().length) / space
+            var needSpace2 = (maxLength - lineWriter.trim().length) % space
             var words = split.size
             for (i in split.indices) {
-                if (split[i] != "") {
-                    writer.write(split[i])
-                    if (words > 1) {
-                        if (needSpace2 == 0) {
-                            for (j in 1..needSpace + 1) writer.write(" ")
-                        } else if (needSpace2 != 0) {
-                            for (j in 1..needSpace + 2) writer.write(" ")
-                            needSpace2--
-                        }
-                        words--
+                writer.write(split[i])
+                if (words > 1) {
+                    if (needSpace2 == 0) {
+                        for (j in 1..needSpace + 1) writer.write(" ")
+                    } else if (needSpace2 != 0) {
+                        for (j in 1..needSpace + 2) writer.write(" ")
+                        needSpace2--
                     }
+                    words--
                 }
             }
         } else {
