@@ -154,15 +154,17 @@ fun alignFileByWidth(inputName: String, outputName: String) {
             var needSpace2 = (maxLength - line.trim().length) % space
             var words = split.size
             for (i in split.indices) {
-                writer.write(split[i])
-                if (words > 1) {
-                    if (needSpace2 == 0) {
-                        for (j in 1..needSpace + 1) writer.write(" ")
-                    } else if (needSpace2 != 0) {
-                        for (j in 1..needSpace + 2) writer.write(" ")
-                        needSpace2--
+                if (split[i] != "") {
+                    writer.write(split[i])
+                    if (words > 1) {
+                        if (needSpace2 == 0) {
+                            for (j in 1..needSpace + 1) writer.write(" ")
+                        } else if (needSpace2 != 0) {
+                            for (j in 1..needSpace + 2) writer.write(" ")
+                            needSpace2--
+                        }
+                        words--
                     }
-                    words--
                 }
             }
         } else {
