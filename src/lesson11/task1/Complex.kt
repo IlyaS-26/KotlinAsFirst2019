@@ -64,6 +64,13 @@ class Complex(val re: Double, val im: Double) {
      */
     override fun equals(other: Any?): Boolean = other is Complex && im == other.im && re == other.re
 
+    override fun hashCode(): Int {
+        var result = re.hashCode()
+        result = 31 * result + im.hashCode()
+        return result
+    }
+
+
     /**
      * Преобразование в строку
      */
