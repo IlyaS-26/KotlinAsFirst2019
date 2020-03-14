@@ -60,12 +60,12 @@ class PhoneBook {
      */
     fun addPhone(name: String, phone: String): Boolean {
         if (!phone.matches(regexPhone) && name.matches(regexName)) return false
-        for ((human, number) in book) {
+        for ((_, number) in book) {
             if (phone in number) return false
-            if (name == human) {
-                book[name] = book[name]!!.plus(phone)
-                return true
-            }
+        }
+        if (book.containsKey(name)) {
+            book[name] = book[name]!!.plus(phone)
+            return true
         }
         return false
     }
@@ -77,11 +77,9 @@ class PhoneBook {
      * либо у него не было такого номера телефона.
      */
     fun removePhone(name: String, phone: String): Boolean {
-        for ((human, number) in book) {
-            if (phone in number && human == name) {
-                book[name] = number.minus(phone)
-                return true
-            }
+        if (book.containsKey(name) && phone in book.getValue(name)) {
+            book[name] = book[name]!!.minus(phone)
+            return true
         }
         return false
     }
