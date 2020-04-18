@@ -14,7 +14,6 @@ import lesson1.task1.sqr
  * Аргументы конструктора -- вещественная и мнимая часть числа.
  */
 class Complex(val re: Double, val im: Double) {
-
     /**
      * Конструктор из вещественного числа
      */
@@ -23,10 +22,19 @@ class Complex(val re: Double, val im: Double) {
     /**
      * Конструктор из строки вида x+yi
      */
-    constructor(s: String) : this(
-        Regex("""-?\d+(\.\d+)?""").findAll(s).elementAt(0).value.toDouble(),
-        Regex("""-?\d+(\.\d+)?""").findAll(s).elementAt(1).value.toDouble()
-    )
+    companion object MyObject {
+        private fun realPart(p: String): Double {
+            if (!p.matches(Regex("""-?\d+(\.\d+)?[-+]?\d+(\.\d+)?i"""))) throw IllegalArgumentException()
+            return Regex("""-?\d+(\.\d+)?""").findAll(p).elementAt(0).value.toDouble()
+        }
+
+        private fun imaginaryPart(p: String): Double {
+            if (!p.matches(Regex("""-?\d+(\.\d+)?[-+]?\d+(\.\d+)?i"""))) throw IllegalArgumentException()
+            return Regex("""-?\d+(\.\d+)?""").findAll(p).elementAt(1).value.toDouble()
+        }
+    }
+
+    constructor(s: String) : this(realPart(s), imaginaryPart(s))
 
     /**
      * Сложение.
@@ -76,10 +84,10 @@ class Complex(val re: Double, val im: Double) {
      */
     override fun toString(): String {
         return when {
-            im < 0 -> "$re${im}i"
-            im > 0 -> "$re+${im}i"
             im == 0.0 -> "$re"
             re == 0.0 -> "${im}i"
+            im < 0 -> "$re${im}i"
+            im > 0 -> "$re+${im}i"
             else -> "$re"
         }
     }

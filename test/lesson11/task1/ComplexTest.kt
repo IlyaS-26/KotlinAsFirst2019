@@ -56,5 +56,7 @@ internal class ComplexTest {
         assertEquals("14.0", Complex(14.0, 0.0).toString())
         assertEquals("7.0-5.6i", Complex(7.0, -5.6).toString())
         assertEquals("14.0+5.0i", Complex(14.0, 5.0).toString())
+        assertEquals("0.0", Complex(0.0, 0.0).toString())
+        assertEquals("5.0i", Complex(0.0, 5.0).toString())
     }
 }

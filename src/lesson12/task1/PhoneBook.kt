@@ -60,8 +60,8 @@ class PhoneBook {
      */
     fun addPhone(name: String, phone: String): Boolean {
         if (!phone.matches(regexPhone) && name.matches(regexName)) return false
-        for ((_, number) in book) {
-            if (phone in number) return false
+        for ((_, phoneNumber) in book) {
+            if (phone in phoneNumber) return false
         }
         if (book.containsKey(name)) {
             book[name] = book[name]!!.plus(phone)
@@ -89,21 +89,15 @@ class PhoneBook {
      * Вернуть все номера телефона заданного человека.
      * Если этого человека нет в книге, вернуть пустой список
      */
-    fun phones(name: String): Set<String> {
-        for ((human, number) in book)
-            if (name == human) {
-                return number
-            }
-        return emptySet()
-    }
+    fun phones(name: String): Set<String> = book.getOrDefault(name, emptySet())
 
     /**
      * Вернуть имя человека по заданному номеру телефона.
      * Если такого номера нет в книге, вернуть null.
      */
     fun humanByPhone(phone: String): String? {
-        for ((human, number) in book)
-            if (phone in number) {
+        for ((human, phoneNumber) in book)
+            if (phone in phoneNumber) {
                 return human
             }
         return null
